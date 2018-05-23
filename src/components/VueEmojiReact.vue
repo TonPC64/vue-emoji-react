@@ -1,21 +1,42 @@
 <template>
   <div>
-    <img style="width: 16px; height: 16px" :src="getEmoji(name)" :key="name" v-for="name in emoji" />
+    <div class="emojiStyle wrapper " v-for="emoji in emojis" :key="emoji.name">
+      <img width="16" height="16" :src="getEmoji(emoji.name)" />
+      <span class="count">{{emoji.count}}</span>
+    </div>
+    <span class="wrapper count">+</span>
   </div>
 </template>
 
 <script>
-import { emojiList as emoji } from 'get-emoji';
 import getEmoji from 'get-emoji';
 
 export default {
   data() {
     return {
-      emoji
+      emoji: getEmoji.emojiList,
+      emojis: [
+        {
+          name: 'rage',
+          count: 2
+        },
+        {
+          name: 'blush',
+          count: 1
+        },
+        {
+          name: 100,
+          count: 3
+        },
+        {
+          name: 'grinning',
+          count: 2
+        }
+      ]
     }
   },
   methods: {
-    getEmoji
+    getEmoji,
   },
   created () {
     // const show = emoji.filter(name => name.indexOf(this.state.filter) !== -1);
@@ -25,7 +46,7 @@ export default {
 </script>
 
 <style scoped>
-.wrapperStyle {
+.wrapper {
 	display: inline-block;
 	margin-top: 2px;
 	margin-bottom: 2px;
@@ -40,17 +61,18 @@ export default {
 	user-select: none;
 }
 
+.wrapper:hover {
+	border: 1px solid #4fb0fc;
+}
+
 .emojiStyle {
 	line-height: 20px;
 	vertical-align: middle;
 	display: inline-block;
 }
 
-.wrapperHover {
-	border: 1px solid #4fb0fc;
-}
 
-.countStyle {
+.count {
 	font-size: 11px;
 	font-family: helvetica, arial;
 	position: relative;
@@ -59,7 +81,7 @@ export default {
 	color: #959595;
 }
 
-.countHover {
+.count:hover {
 	color: #4fb0fc;
 }
 
