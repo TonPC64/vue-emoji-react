@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="emojiStyle wrapper " v-for="emoji in emojis" :key="emoji.name">
+    <div class="wrapper emojiStyle" v-for="emoji in emojis" :key="emoji.name">
       <img width="16" height="16" :src="getEmoji(emoji.name)" />
       <span class="count">{{emoji.count}}</span>
     </div>
@@ -77,21 +77,11 @@ export default {
 	font-family: helvetica, arial;
 	position: relative;
 	top: -2px;
-	padding: 0 1px 3px;
+	padding: 1px 3px;
 	color: #959595;
 }
 
 .count:hover {
 	color: #4fb0fc;
-}
-
-.selectorStyle {
-	box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24);
-	background-color: #fff;
-	width: 250px;
-	height: 220px;
-	position: relative;
-	left: 10px;
-	top: 0px;
 }
 </style>
