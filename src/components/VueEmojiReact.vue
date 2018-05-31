@@ -5,16 +5,23 @@
       <span class="count">{{emoji.count}}</span>
     </div>
     <span class="wrapper count">+</span>
+    <picker-emoji>
+      <img width="16" height="16" :key="emo" v-for="emo in emoji" :src="getEmoji(emo)" />
+    </picker-emoji>
   </div>
 </template>
 
 <script>
+import { emojiList as emoji } from 'get-emoji';
 import getEmoji from 'get-emoji';
-
+import PickerEmoji from './PickerEmoji';
 export default {
+  components: {
+    PickerEmoji
+  },
   data() {
     return {
-      emoji: getEmoji.emojiList,
+      emoji,
       emojis: [
         {
           name: 'rage',
@@ -40,7 +47,6 @@ export default {
   },
   created () {
     // const show = emoji.filter(name => name.indexOf(this.state.filter) !== -1);
-    console.log(emoji)
   }
 }
 </script>
