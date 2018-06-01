@@ -6,7 +6,9 @@
     </div>
     <span class="wrapper count">+</span>
     <picker-emoji>
-      <img width="16" height="16" :key="emo" v-for="emo in emoji" :src="getEmoji(emo)" />
+      <span style="cursor:pointer; padding: 5px;" :key="emo" v-for="emo in emoji">
+        <img width="16" height="16" :src="getEmoji(emo)" @click="addEmoji(emo)" />
+      </span>
     </picker-emoji>
   </div>
 </template>
@@ -44,6 +46,14 @@ export default {
   },
   methods: {
     getEmoji,
+    addEmoji(name) {
+      if (!this.emojis.filter(emo => emo.name === name).length) {
+        this.emojis.push({
+          name,
+          count: 1
+        })
+      }
+    }
   },
   created () {
     // const show = emoji.filter(name => name.indexOf(this.state.filter) !== -1);
