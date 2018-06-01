@@ -1,28 +1,34 @@
 <template>
   <div>
-    <div class="wrapper emojiStyle" v-for="emoji in emojis" :key="emoji.name">
+    <div style="display:inline-block;" class="wrapper emojiStyle" v-for="emoji in emojis" :key="emoji.name">
       <img width="16" height="16" :src="getEmoji(emoji.name)" />
       <span class="count">{{emoji.count}}</span>
     </div>
-    <span class="wrapper count">+</span>
-    <picker-emoji>
-      <span style="cursor:pointer; padding: 5px;" :key="emo" v-for="emo in emoji">
-        <img width="16" height="16" :src="getEmoji(emo)" @click="addEmoji(emo)" />
-      </span>
-    </picker-emoji>
+    <div style="display:inline-block;">
+      <span class="wrapper count" @click="showPicker = true">+</span>
+      <div class="selectorStyle" v-show="showPicker">
+        <div>
+          <input class="input" type='text' placeholder='Search' v-model="keyword" />
+          <span class="exit" @click="showPicker = false">X</span>
+        </div>
+        <div style="padding: 10px; paddingTop: 5px; width: 230px; height: 160px; overflow: auto">
+          <span style="cursor:pointer; padding: 5px;" :key="emo" v-for="emo in emoji">
+            <img width="16" height="16" :src="getEmoji(emo)" @click="addEmoji(emo)" />
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { emojiList as emoji } from 'get-emoji';
 import getEmoji from 'get-emoji';
-import PickerEmoji from './PickerEmoji';
 export default {
-  components: {
-    PickerEmoji
-  },
   data() {
     return {
+      showPicker: false,
+      keyword: '',
       emoji,
       emojis: [
         {
@@ -97,7 +103,33 @@ export default {
 	color: #959595;
 }
 
-.count:hover {
+.count:hover, .exit:hover {
 	color: #4fb0fc;
+}
+
+.exit {
+	color: rgb(232, 232, 232); 
+	font-size: 20px;
+	cursor: pointer;
+	float: right;
+	margin-top: -32px;
+	margin-right: 5px;
+}
+.selectorStyle {
+	box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24);
+	background-color: #fff;
+	width: 250px;
+	height: 220px;
+	position: relative;
+	left: 10px;
+	top: 0px;
+}
+
+.input {
+	margin: 10px;
+	width: 85%;
+	border-radius: 5px;
+	border: 1px solid #E8E8E8;
+	padding: 2px;
 }
 </style>
