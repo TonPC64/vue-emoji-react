@@ -9,8 +9,8 @@
       </div>
     </div>
     <div style="display:inline-block;">
-      <div class="wrapper">
-        <span class="count" @click="showPicker">+</span>
+      <div class="wrapper" @click="showPicker">
+        <span class="count">+</span>
       </div>
       <div class="selector-style" v-show="isShowPicker">
         <div>
