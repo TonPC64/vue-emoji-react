@@ -3,24 +3,24 @@
     <div style="display:inline-block;">
       <div @click="increase(index)" class="wrapper" v-for="(emoji, index) in emojis" :key="emoji.name">
         <span class="emoji-style">
-          <img width="16" height="16" :src="getEmoji(emoji.name)" />
+          <img style="width:16px;height:16px" :src="getEmoji(emoji.name)" />
         </span>
         <span class="count">{{emoji.count}}</span>
       </div>
-      <div style="display:inline-block;">
-        <div class="wrapper">
-          <span class="count" @click="showPicker">+</span>
-          <div class="selector-style" v-show="isShowPicker">
-            <div>
-              <input class="input" @click="showPicker" type='text' placeholder='Search' v-model="keyword" />
-            </div>
-            <span class="exit" @click="hidePicker">X</span>
-            <div class="emoji-box">
-              <span style="cursor:pointer;padding:5px;" :key="emo" v-for="emo in emoji">
-                <img width="16" height="16" :src="getEmoji(emo)" @click="addEmoji(emo)" />
-              </span>
-            </div>
-          </div>
+    </div>
+    <div style="display:inline-block;">
+      <div class="wrapper">
+        <span class="count" @click="showPicker">+</span>
+      </div>
+      <div class="selector-style" v-show="isShowPicker">
+        <div>
+          <input class="input" @click="showPicker" type='text' placeholder='Search' v-model="keyword" />
+        </div>
+        <span class="exit" @click="hidePicker">X</span>
+        <div class="emoji-box">
+          <span style="cursor:pointer;padding:5px;" :key="emo" v-for="emo in emoji">
+            <img width="16" height="16" :src="getEmoji(emo)" @click="addEmoji(emo)" />
+          </span>
         </div>
       </div>
     </div>
