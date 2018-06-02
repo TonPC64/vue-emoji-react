@@ -28,8 +28,7 @@
 </template>
 
 <script>
-import { emojiList as emoji } from 'get-emoji';
-import getEmoji from 'get-emoji';
+var getEmoji = require('get-emoji')
 export default {
   props: {
     value: {
@@ -45,11 +44,11 @@ export default {
   },
   computed: {
     emoji () {
-      return emoji.filter(name => name.indexOf(this.keyword) !== -1)
+      return getEmoji.emojiList.filter(name => name.indexOf(this.keyword) !== -1)
     }
   },
   methods: {
-    getEmoji,
+    getEmoji: getEmoji.default,
     hidePicker() {
       this.isShowPicker = false      
     },
