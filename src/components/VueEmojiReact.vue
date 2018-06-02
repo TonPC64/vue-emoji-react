@@ -29,7 +29,6 @@ export default {
     return {
       showPicker: false,
       keyword: '',
-      emoji,
       emojis: [
         {
           name: 'rage',
@@ -48,6 +47,11 @@ export default {
           count: 2
         }
       ]
+    }
+  },
+  computed: {
+    emoji () {
+      return emoji.filter(name => name.indexOf(this.keyword) !== -1)
     }
   },
   methods: {
@@ -95,7 +99,6 @@ export default {
 	vertical-align: middle;
 	display: inline-block;
 }
-
 
 .count {
 	font-size: 11px;
