@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="display:inline-block;" class="wrapper emojiStyle" v-for="emoji in emojis" :key="emoji.name">
+    <div @click="increase(index)" style="display:inline-block;" class="wrapper emojiStyle" v-for="(emoji, index) in emojis" :key="emoji.name">
       <img width="16" height="16" :src="getEmoji(emoji.name)" />
       <span class="count">{{emoji.count}}</span>
     </div>
@@ -52,6 +52,9 @@ export default {
   },
   methods: {
     getEmoji,
+    increase (index) {
+      this.emojis[index].count++
+    },
     addEmoji(name) {
       if (!this.emojis.filter(emo => emo.name === name).length) {
         this.emojis.push({
@@ -115,6 +118,7 @@ export default {
 	margin-top: -32px;
 	margin-right: 5px;
 }
+
 .selectorStyle {
 	box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24);
 	background-color: #fff;
