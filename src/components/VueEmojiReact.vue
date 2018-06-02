@@ -1,20 +1,26 @@
 <template>
-  <div>
-    <div @click="increase(index)" style="display:inline-block;" class="wrapper emojiStyle" v-for="(emoji, index) in emojis" :key="emoji.name">
-      <img width="16" height="16" :src="getEmoji(emoji.name)" />
-      <span class="count">{{emoji.count}}</span>
-    </div>
+  <div @click="hidePicker" style="display:inline-flex;">
     <div style="display:inline-block;">
-      <span class="wrapper count" @click="showPicker = true">+</span>
-      <div class="selectorStyle" v-show="showPicker">
-        <div>
-          <input class="input" type='text' placeholder='Search' v-model="keyword" />
-          <span class="exit" @click="showPicker = false">X</span>
-        </div>
-        <div style="padding: 10px; paddingTop: 5px; width: 230px; height: 160px; overflow: auto">
-          <span style="cursor:pointer; padding: 5px;" :key="emo" v-for="emo in emoji">
-            <img width="16" height="16" :src="getEmoji(emo)" @click="addEmoji(emo)" />
-          </span>
+      <div @click="increase(index)" class="wrapper" v-for="(emoji, index) in emojis" :key="emoji.name">
+        <span class="emoji-style">
+          <img width="16" height="16" :src="getEmoji(emoji.name)" />
+        </span>
+        <span class="count">{{emoji.count}}</span>
+      </div>
+      <div style="display:inline-block;">
+        <div class="wrapper">
+          <span class="count" @click="showPicker">+</span>
+          <div class="selector-style" v-show="isShowPicker">
+            <div>
+              <input class="input" @click="showPicker" type='text' placeholder='Search' v-model="keyword" />
+            </div>
+            <span class="exit" @click="hidePicker">X</span>
+            <div class="emoji-box">
+              <span style="cursor:pointer;padding:5px;" :key="emo" v-for="emo in emoji">
+                <img width="16" height="16" :src="getEmoji(emo)" @click="addEmoji(emo)" />
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -27,7 +33,7 @@ import getEmoji from 'get-emoji';
 export default {
   data() {
     return {
-      showPicker: false,
+      isShowPicker: false,
       keyword: '',
       emojis: [
         {
@@ -56,6 +62,13 @@ export default {
   },
   methods: {
     getEmoji,
+    hidePicker() {
+      this.isShowPicker = false      
+    },
+    showPicker(evt) {
+      evt.stopPropagation()
+      this.isShowPicker = true
+    },
     increase (index) {
       this.emojis[index].count++
     },
@@ -94,10 +107,8 @@ export default {
 	border: 1px solid #4fb0fc;
 }
 
-.emojiStyle {
-	line-height: 20px;
-	vertical-align: middle;
-	display: inline-block;
+.wrapper:hover .count {
+	color: #4fb0fc;
 }
 
 .count {
@@ -105,13 +116,20 @@ export default {
 	font-family: helvetica, arial;
 	position: relative;
 	top: -2px;
-	padding: 1px 3px;
+	padding: 0px 1px 3px;
 	color: #959595;
 }
 
 .count:hover, .exit:hover {
 	color: #4fb0fc;
 }
+
+.emoji-style {
+	line-height: 20px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
 
 .exit {
 	color: rgb(232, 232, 232); 
@@ -122,7 +140,7 @@ export default {
 	margin-right: 5px;
 }
 
-.selectorStyle {
+.selector-style {
 	box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24);
 	background-color: #fff;
 	width: 250px;
@@ -137,6 +155,13 @@ export default {
 	width: 85%;
 	border-radius: 5px;
 	border: 1px solid #E8E8E8;
-	padding: 2px;
+}
+
+.emoji-box {
+  padding:10px;
+  padding-top:5px;
+  width:230px;
+  height:160px;
+  overflow:auto;
 }
 </style>
