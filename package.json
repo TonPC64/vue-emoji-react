@@ -1,11 +1,13 @@
 {
   "name": "vue-emoji-react",
   "description": "a clone of slack emoji reactions in VueJS",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Chanwit Piromplad <kingkong2103@gmail.com>",
   "license": "MIT",
   "main": "public/vue-emoji-react.min.js",
-  "files": ["public"],
+  "files": [
+    "public"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/TonPC64/vue-emoji-react.git"
@@ -19,7 +21,11 @@
     "get-emoji": "^2.0.0",
     "vue": "^2.5.11"
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
