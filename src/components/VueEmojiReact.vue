@@ -1,7 +1,7 @@
 <template>
   <div @click="hidePicker" style="display:inline-flex;">
     <div style="display:inline-block;">
-      <div @click="increase(index)" class="wrapper" v-for="(emoji, index) in emojis" :key="emoji.name">
+      <div @click="increase(index)" class="wrapper" v-for="(emoji, index) in value" :key="emoji.name">
         <span class="emoji-style">
           <img style="width:16px;height:16px" :src="getEmoji(emoji.name)" />
         </span>
@@ -31,28 +31,16 @@
 import { emojiList as emoji } from 'get-emoji';
 import getEmoji from 'get-emoji';
 export default {
+  props: {
+    value: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
       isShowPicker: false,
       keyword: '',
-      emojis: [
-        {
-          name: 'rage',
-          count: 2
-        },
-        {
-          name: 'blush',
-          count: 1
-        },
-        {
-          name: 100,
-          count: 3
-        },
-        {
-          name: 'grinning',
-          count: 2
-        }
-      ]
     }
   },
   computed: {
@@ -70,19 +58,16 @@ export default {
       this.isShowPicker = true
     },
     increase (index) {
-      this.emojis[index].count++
+      this.value[index].count++
     },
     addEmoji(name) {
-      if (!this.emojis.filter(emo => emo.name === name).length) {
-        this.emojis.push({
+      if (!this.value.filter(emo => emo.name === name).length) {
+        this.value.push({
           name,
           count: 1
         })
       }
     }
-  },
-  created () {
-    // const show = emoji.filter(name => name.indexOf(this.state.filter) !== -1);
   }
 }
 </script>
