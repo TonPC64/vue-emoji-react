@@ -1,7 +1,7 @@
 {
   "name": "vue-emoji-react",
   "description": "a clone of slack emoji reactions in VueJS",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": "Chanwit Piromplad <kingkong2103@gmail.com>",
   "license": "MIT",
   "main": "public/vue-emoji-react.min.js",
